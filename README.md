@@ -24,14 +24,14 @@ Python is already on every Mac. On Windows, if `python3 --version` doesn't work,
 
 **Get the code.** In the Claude desktop app, open Claude Code and ask:
 
-> Clone https://github.com/YOURNAME/embarcadero-model to my desktop, then run model.py and show me the output.
+> Clone https://github.com/lsarta/embarcadero-model to my desktop, then run model.py and show me the output.
 
 That's it. If something's missing, Claude will tell you what and fix it.
 
 **Or do it yourself:**
 
 ```bash
-git clone https://github.com/YOURNAME/embarcadero-model.git
+git clone https://github.com/lsarta/embarcadero-model.git
 cd embarcadero-model
 python3 model.py
 ```
