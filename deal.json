@@ -1,0 +1,40 @@
+{
+  "_comment": "Embarcadero Center — Tower 2. ILLUSTRATIVE ASSUMPTIONS ONLY. Not investment advice, not real deal terms. Fabricated for teaching purposes.",
+
+  "property": {
+    "name": "Embarcadero Center — Tower 2",
+    "city": "San Francisco, CA",
+    "type": "Office",
+    "rentable_sf": 750000
+  },
+
+  "acquisition": {
+    "purchase_price": 375000000,
+    "closing_costs_pct": 0.015,
+    "hold_years": 5
+  },
+
+  "revenue": {
+    "in_place_rent_psf": 68.00,
+    "market_rent_psf": 72.00,
+    "rent_growth_pct": 0.03,
+    "occupancy_pct": 0.87,
+    "stabilized_occupancy_pct": 0.92,
+    "months_to_stabilize": 24
+  },
+
+  "expenses": {
+    "opex_psf": 24.50,
+    "opex_growth_pct": 0.025,
+    "management_fee_pct_egi": 0.03
+  },
+
+  "capital": {
+    "reserves_psf": 0.35
+  },
+
+  "exit": {
+    "exit_cap_pct": 0.0625,
+    "cost_of_sale_pct": 0.0175
+  }
+}
