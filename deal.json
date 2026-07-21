@@ -1,40 +1,104 @@
 {
-  "_comment": "Embarcadero Center — Tower 2. ILLUSTRATIVE ASSUMPTIONS ONLY. Not investment advice, not real deal terms. Fabricated for teaching purposes.",
+  "_comment": "Two Embarcadero Center, San Francisco — hypothetical acquisition. Building facts (size, ownership, occupancy) are real and sourced. Deal terms and financial assumptions are OUR JUDGMENT calibrated to published market data — the building is not for sale and these are not its actual economics. Sources listed in each input's 'basis' field and in SOURCES.md. Not investment advice.",
 
   "property": {
-    "name": "Embarcadero Center — Tower 2",
+    "name": "Two Embarcadero Center",
     "city": "San Francisco, CA",
     "type": "Office",
-    "rentable_sf": 750000
+    "rentable_sf": 789000,
+    "basis": "789K SF, 45 stories, owned by BXP since 1998 (bxp.com property page). Hypothetical deal — not actually for sale."
   },
 
   "acquisition": {
-    "purchase_price": 375000000,
-    "closing_costs_pct": 0.015,
-    "hold_years": 5
+    "purchase_price": {
+      "value": 390000000,
+      "range": [355000000, 425000000],
+      "label": "Purchase price",
+      "basis": "$494/SF. Judgment, bracketed by 2026 comps: reset value-add trades in the low-to-mid $300s/SF (550 Kearny, 455 Market guidance, TheRealDeal 5/2026) vs. trophy pricing at $900+/SF (Transamerica Pyramid complex $922/SF Q1'26 per CBRE; 101 California asking ~$900/SF, SF Standard 1/2026). An 85%-leased EC tower sits between."
+    },
+    "closing_costs_pct": {
+      "value": 0.015,
+      "label": "Closing costs (% of price)",
+      "basis": "Judgment. Title, legal, SF transfer tax."
+    },
+    "hold_years": {
+      "value": 5,
+      "label": "Hold period (years)",
+      "basis": "Assumed. Typical value-add fund hold."
+    }
   },
 
   "revenue": {
-    "in_place_rent_psf": 68.00,
-    "market_rent_psf": 72.00,
-    "rent_growth_pct": 0.03,
-    "occupancy_pct": 0.87,
-    "stabilized_occupancy_pct": 0.92,
-    "months_to_stabilize": 24
+    "in_place_rent_psf": {
+      "value": 68.00,
+      "range": [64.00, 74.00],
+      "label": "In-place rent ($/SF, gross)",
+      "basis": "Set slightly below asking. Q2'26 SF citywide asking $70.31 gross, CBD Class A $76.60 (Cushman & Wakefield); Q1'26 direct asking $71.19 FSG (CBRE), $67.77 (Newmark). In-place on a stabilized tower typically trails asking."
+    },
+    "rent_growth_pct": {
+      "value": 0.03,
+      "range": [0.00, 0.04],
+      "label": "Annual rent growth",
+      "basis": "Asking rents +3.7% YoY Q1'26 (CBRE), +3.4% (Kidder). But Newmark notes rents 'hovered around $68 for six quarters' — so the low end of the band is zero, not 2%."
+    },
+    "occupancy_pct": {
+      "value": 0.85,
+      "label": "Current occupancy",
+      "basis": "BXP: Embarcadero Center office space ~85% occupied (SF Standard, 7/2025). BXP SF region overall 79.7% (bxp.com, 4/2026)."
+    },
+    "stabilized_occupancy_pct": {
+      "value": 0.92,
+      "range": [0.88, 0.95],
+      "label": "Stabilized occupancy",
+      "basis": "Class A Tier 1 direct vacancy is 8.2% (C&W Q2'26) — i.e. ~92% occupancy for the best assets. Band spans citywide-average pessimism vs. Tier 1 performance."
+    },
+    "months_to_stabilize": {
+      "value": 24,
+      "range": [12, 36],
+      "label": "Months to stabilize",
+      "basis": "Judgment. Market context: 5 consecutive quarters of positive absorption, strongest leasing since 2019 (C&W Q2'26), AI tenants driving demand (CBRE Q1'26)."
+    }
   },
 
   "expenses": {
-    "opex_psf": 24.50,
-    "opex_growth_pct": 0.025,
-    "management_fee_pct_egi": 0.03
+    "opex_psf": {
+      "value": 24.50,
+      "range": [22.00, 27.00],
+      "label": "Operating expenses ($/SF, incl. RE tax)",
+      "basis": "Derived. BOMA's last published SF figure was $11.85/SF (2018, excludes property tax) — dated. Prop 13 resets tax basis at sale: ~1.18% on $390M ≈ $5.80/SF alone. Plus insurance and utility escalation since 2018, mid-$20s all-in is our estimate. The weakest-sourced input in this model — which is worth knowing, because it ranks #2 in the sensitivity table."
+    },
+    "opex_growth_pct": {
+      "value": 0.025,
+      "range": [0.02, 0.035],
+      "label": "Annual opex growth",
+      "basis": "Judgment, CPI-anchored. Insurance has run hotter than CPI in recent years, hence the asymmetric band."
+    },
+    "management_fee_pct_egi": {
+      "value": 0.03,
+      "label": "Management fee (% of EGI)",
+      "basis": "Judgment. Typical institutional office range 2.5–3.5%."
+    }
   },
 
   "capital": {
-    "reserves_psf": 0.35
+    "reserves_psf": {
+      "value": 0.35,
+      "label": "Capital reserves ($/SF)",
+      "basis": "Judgment. Typical lender requirement. Understated for a 1970s-80s vintage tower — see SOURCES.md."
+    }
   },
 
   "exit": {
-    "exit_cap_pct": 0.0625,
-    "cost_of_sale_pct": 0.0175
+    "exit_cap_pct": {
+      "value": 0.0625,
+      "range": [0.0575, 0.0700],
+      "label": "Exit cap rate",
+      "basis": "Judgment against listed averages: SF commercial cap rates ~6.08% (LoopNet) to 6.29% (CityFeet) across asset types, 2026. CBRE 2026 Outlook expects 5–15bps of compression for quality assets. Office should price wide of the blended average; band widened to 7.00% on the high side for office-specific risk."
+    },
+    "cost_of_sale_pct": {
+      "value": 0.0175,
+      "label": "Cost of sale",
+      "basis": "Judgment. Brokerage and closing."
+    }
   }
 }
