@@ -10,11 +10,24 @@ Python 3. No packages, no virtual environment.
 
 ## Run it
 
+The workshop way — paste this into Claude Code:
+
+```
+Clone https://github.com/lsarta/embarcadero-model.git into a folder on my
+desktop, then run the dashboard and open it in my browser.
+```
+
+Or by hand:
+
 ```bash
 git clone https://github.com/lsarta/embarcadero-model.git
 cd embarcadero-model
-python3 model.py
+python3 dashboard.py
 ```
+
+The dashboard opens at http://localhost:8642 and re-runs the model every
+time you refresh. `python3 model.py` prints the same results to the
+terminal instead. (Windows: use `python` if `python3` isn't recognized.)
 
 ## Files
 
