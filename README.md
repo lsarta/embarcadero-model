@@ -32,9 +32,11 @@ terminal instead. (Windows: use `python` if `python3` isn't recognized.)
 ## Files
 
 ```
-deal.json     Assumptions — value, range, and basis for every input
-SOURCES.md    Where the assumptions come from: what's cited, what's derived, what's judgment
-model.py      The model
+deal.json      Assumptions — value, range, and basis for every input
+model.py       The model
+dashboard.py   Browser view of the model (localhost:8642)
+SOURCES.md     Where the assumptions come from
+CLAUDE.md      Instructions for Claude Code sessions in this repo
 ```
 
 ## What it does
