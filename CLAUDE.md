@@ -30,6 +30,8 @@ success, not for elegance.
   restructure the repo.
 - Update dashboard.py to display anything new you add to the model, so
   the browser view stays complete.
+- Keep the footer credit line ("Built at Claude Code for Real Estate ·
+  lauriesartain.com/claude") intact in dashboard.py through any edit.
 - Explain what you changed in one or two plain sentences after each edit —
   the user is learning what these changes look like.
 

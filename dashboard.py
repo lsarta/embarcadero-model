@@ -75,42 +75,61 @@ def render_page():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(p['name'])} — Valuation</title>
 <style>
-  body {{ font: 16px/1.55 -apple-system, 'Segoe UI', Roboto, sans-serif;
-         margin: 0; background: #faf9f7; color: #1a1a1a;
-         padding: 2rem 1.25rem 4rem; }}
-  .wrap {{ max-width: 860px; margin: 0 auto; }}
-  h1 {{ font-size: 1.5rem; margin: 0 0 .25rem; }}
-  .sub {{ color: #6b6b6b; margin: 0 0 2rem; font-size: .95rem; }}
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap');
+  :root {{
+    --bg: #0a0a0a; --panel: #141414; --line: #262626;
+    --ink: #ededed; --muted: #9a9a9a; --gold: #c9a227;
+  }}
+  * {{ box-sizing: border-box; }}
+  body {{ font: 15px/1.55 Inter, -apple-system, 'Segoe UI', sans-serif;
+         margin: 0; background: var(--bg); color: var(--ink);
+         padding: 2.5rem 1.25rem 4rem; }}
+  .wrap {{ max-width: 880px; margin: 0 auto; }}
+  h1 {{ font-family: 'Playfair Display', Georgia, serif; font-weight: 600;
+       font-size: 1.9rem; letter-spacing: .01em; margin: 0 0 .3rem; }}
+  .sub {{ color: var(--muted); margin: 0 0 2.25rem; font-size: .92rem; }}
+  .sub .tag {{ color: var(--gold); }}
   .cards {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
-            gap: .75rem; margin-bottom: 2rem; }}
-  .card {{ background: #fff; border: 1px solid #e2e0dc; border-radius: 8px;
-           padding: .9rem 1rem; }}
-  .card .k {{ font-size: .72rem; text-transform: uppercase; letter-spacing: .06em;
-              color: #6b6b6b; margin-bottom: .2rem; }}
-  .card .v {{ font-size: 1.35rem; font-weight: 600;
+            gap: .8rem; margin-bottom: 2.25rem; }}
+  .card {{ background: var(--panel); border: 1px solid var(--line);
+           border-radius: 10px; padding: 1rem 1.1rem; }}
+  .card .k {{ font-size: .68rem; text-transform: uppercase; letter-spacing: .12em;
+              color: var(--muted); margin-bottom: .35rem; }}
+  .card .v {{ font-size: 1.45rem; font-weight: 600;
               font-variant-numeric: tabular-nums; }}
-  .card.hero .v {{ color: #8a4b2a; }}
-  h2 {{ font-size: 1.1rem; margin: 2rem 0 .6rem; }}
-  table {{ width: 100%; border-collapse: collapse; background: #fff;
-           border: 1px solid #e2e0dc; border-radius: 8px; overflow: hidden;
-           font-size: .92rem; }}
-  th, td {{ padding: .5rem .7rem; text-align: left;
-            border-bottom: 1px solid #eee; }}
-  th {{ background: #f4f2ee; font-size: .75rem; text-transform: uppercase;
-        letter-spacing: .05em; color: #6b6b6b; }}
+  .card.hero {{ border-color: var(--gold); }}
+  .card.hero .v {{ color: var(--gold); font-size: 1.7rem; }}
+  h2 {{ font-family: 'Playfair Display', Georgia, serif; font-weight: 500;
+       font-size: 1.15rem; margin: 2.25rem 0 .7rem; }}
+  h2::after {{ content: ""; display: block; height: 1px; margin-top: .45rem;
+              background: linear-gradient(90deg, var(--gold), transparent 60%); }}
+  table {{ width: 100%; border-collapse: collapse; background: var(--panel);
+           border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+           font-size: .9rem; }}
+  th, td {{ padding: .55rem .75rem; text-align: left;
+            border-bottom: 1px solid var(--line); }}
+  th {{ background: #1b1b1b; font-size: .68rem; text-transform: uppercase;
+        letter-spacing: .1em; color: var(--muted); font-weight: 500; }}
+  tr:last-child td {{ border-bottom: 0; }}
   td.num, th.num {{ text-align: right; font-variant-numeric: tabular-nums; }}
-  tr.barrow td {{ border-bottom: 1px solid #e2e0dc; padding: 0 .7rem .5rem; }}
-  .bar {{ height: 7px; background: #8a4b2a; border-radius: 3px; opacity: .75; }}
-  .foot {{ margin-top: 2.5rem; color: #6b6b6b; font-size: .85rem; }}
-  .refresh {{ position: fixed; top: 1rem; right: 1rem; background: #1a1a1a;
-              color: #fff; border: 0; border-radius: 6px; padding: .5rem .9rem;
-              font-size: .85rem; cursor: pointer; }}
+  tr.barrow td {{ border-bottom: 1px solid var(--line); padding: 0 .75rem .55rem; }}
+  .bar {{ height: 6px; background: linear-gradient(90deg, var(--gold), #8a6b14);
+         border-radius: 3px; }}
+  .foot {{ margin-top: 2.5rem; color: var(--muted); font-size: .82rem; }}
+  .brand {{ margin-top: 2.75rem; padding-top: 1.1rem; border-top: 1px solid var(--line);
+           color: var(--muted); font-size: .82rem; letter-spacing: .02em; }}
+  .brand a {{ color: var(--gold); text-decoration: none; }}
+  .refresh {{ position: fixed; top: 1rem; right: 1rem; background: var(--gold);
+              color: #0a0a0a; border: 0; border-radius: 7px; padding: .55rem 1rem;
+              font-size: .85rem; font-weight: 600; cursor: pointer;
+              font-family: Inter, sans-serif; }}
+  .refresh:hover {{ filter: brightness(1.08); }}
 </style></head><body>
 <button class="refresh" onclick="location.reload()">↻ Re-run model</button>
 <div class="wrap">
 <h1>{html.escape(p['name'])}</h1>
 <p class="sub">{html.escape(p['city'])} · {html.escape(p['type'])} ·
-{p['rentable_sf']:,} SF · {hold}-year hold · unlevered</p>
+{p['rentable_sf']:,} SF · {hold}-year hold · <span class="tag">unlevered</span></p>
 
 <div class="cards">
   <div class="card hero"><div class="k">Unlevered IRR</div>
@@ -142,6 +161,9 @@ def render_page():
 <p class="foot">Assumptions and sourcing: <code>deal.json</code> and
 <code>SOURCES.md</code>. Edit the model, then hit re-run.
 Illustrative only — not investment advice.</p>
+
+<p class="brand">Built at Claude Code for Real Estate ·
+<a href="https://lauriesartain.com/claude">lauriesartain.com/claude</a></p>
 </div></body></html>"""
 
 
