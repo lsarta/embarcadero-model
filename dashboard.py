@@ -107,12 +107,12 @@ def kpi_band(deal, returns):
         ("Equity multiple", f"{em:.2f}x", ""),
         ("Basis", f"${basis / 1e6:,.1f}M",
          f"${basis / sf:,.0f}/SF all-in · incl. 1.5% closing"),
-        ("Going-in cap", pct(gic),
+        ("Year 1 yield on cost", pct(gic),
          "Year-1 NOI ÷ total basis"),
         ("Exit value", f"${exitv / 1e6:,.1f}M",
          f"${exitv / sf:,.0f}/SF · net of 1.75% sale cost"),
         ("Exit cap", pct(exit_cap),
-         f"on forward NOI · {bps_inside} bps inside going-in"),
+         f"on forward NOI · {bps_inside} bps inside Year-1 yield"),
     ]
     cells = "".join(
         f"<div class='kpi'><div class='k'>{html.escape(k)}</div>"

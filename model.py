@@ -181,7 +181,7 @@ def report(deal, rows, returns):
               f"{money(r['egi']):>16}{money(r['noi']):>16}{money(r['cash_flow']):>16}")
     print("  " + "-" * 70)
     print(f"  {'Basis (incl. closing)':<34}{money(returns['basis']):>20}")
-    print(f"  {'Going-in cap rate':<34}{returns['going_in_cap']:>20.2%}")
+    print(f"  {'Year 1 yield on cost':<34}{returns['going_in_cap']:>20.2%}")
     print(f"  {'Exit value (net of sale costs)':<34}{money(returns['exit_value']):>20}")
     print(f"  {'Exit cap rate':<34}{val(deal, 'exit', 'exit_cap_pct'):>20.2%}")
     print("  " + "-" * 70)

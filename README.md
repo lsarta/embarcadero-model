@@ -45,7 +45,7 @@ Builds a 5-year cash flow with rent growth, opex growth, and lease-up to stabili
 
 | Basis (incl. closing) | $395,850,000 |
 |---|---|
-| Going-in cap | 6.75% |
+| Year 1 yield on cost | 6.75% |
 | Exit value | $527,053,284 |
 | Unlevered IRR | 12.62% |
 | Equity multiple | 1.71x |

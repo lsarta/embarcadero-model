@@ -25,6 +25,16 @@ success, not for elegance.
   the levered ones so the user can compare. Show debt service and DSCR
   by year. Add the loan's assumptions to deal.json following the existing
   value/range/label/basis structure (basis can say "user-specified").
+  Define the debt economics consistently:
+  - DSCR means NOI divided by debt service for that period.
+  - The outstanding loan balance is repaid from sale proceeds at exit;
+    levered exit proceeds = net sale proceeds minus the loan balance.
+  - Treat a floating index (SOFR etc.) as fixed at the stated rate for
+    the full hold unless the user says otherwise.
+  - Origination and financing fees are paid at close and increase
+    initial equity.
+  - Levered IRR is calculated on equity cash flows: initial equity out,
+    annual levered cash flow, then levered exit proceeds.
 - Preserve the existing structure: assumptions live in deal.json, logic in
   model.py, presentation in dashboard.py. Don't merge these files or
   restructure the repo.

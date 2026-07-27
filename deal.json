@@ -65,7 +65,7 @@
       "value": 24.50,
       "range": [22.00, 27.00],
       "label": "Operating expenses ($/SF, incl. RE tax)",
-      "basis": "Derived. BOMA's last published SF figure was $11.85/SF (2018, excludes property tax) — dated. Prop 13 resets tax basis at sale: ~1.18% on $390M ≈ $5.80/SF alone. Plus insurance and utility escalation since 2018, mid-$20s all-in is our estimate. The weakest-sourced input in this model — which is worth knowing, because it ranks #2 in the sensitivity table."
+      "basis": "Derived. BOMA's last published SF figure was $11.85/SF (2018, excludes property tax) — dated. Prop 13 resets tax basis at sale: ~1.18% on $390M ≈ $5.80/SF alone. Plus insurance and utility escalation since 2018, mid-$20s all-in is our estimate. The weakest-sourced input in this model — which is worth knowing, because it ranks #5 in the sensitivity table."
     },
     "opex_growth_pct": {
       "value": 0.025,
