@@ -2,7 +2,9 @@
 Browser dashboard for the Two Embarcadero Center valuation model.
 
 Run it:   python3 dashboard.py
-Then open http://localhost:8642 (it opens automatically).
+Then open http://localhost:8642 (it opens automatically). If that port is
+already serving a different folder, this one moves to the next free port
+and prints the URL it landed on.
 
 Stdlib only — no installs, no internet required. It runs model.py fresh on
 every page load, so any edit to model.py or deal.json shows up when you
@@ -21,6 +23,7 @@ import io
 import math
 import socket
 import threading
+import urllib.request
 import webbrowser
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -31,6 +34,7 @@ import model
 PORT = 8642
 HERE = Path(__file__).resolve().parent
 CSV_NAME = "pro_forma.csv"
+WHOAMI_PATH = "/__whoami"  # reports which folder this server is serving
 
 
 # ---------------------------------------------------------------- formatting
@@ -646,7 +650,10 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path.split("?")[0]
         try:
-            if path == "/" + CSV_NAME:
+            if path == WHOAMI_PATH:
+                self._send(200, str(HERE).encode("utf-8"),
+                           "text/plain; charset=utf-8")
+            elif path == "/" + CSV_NAME:
                 deal = model.load_deal()
                 rows, _ = model.run(deal)
                 body = write_csv(deal, rows).encode("utf-8")
@@ -687,17 +694,54 @@ def port_in_use(port):
         return s.connect_ex(("127.0.0.1", port)) == 0
 
 
-def main():
-    if port_in_use(PORT):
-        print(f"A dashboard is already running at http://localhost:{PORT}")
-        print("Opening it in your browser. (To restart fresh: press Ctrl+C in")
-        print("the other terminal running dashboard.py first.)")
-        webbrowser.open(f"http://localhost:{PORT}")
-        return
+def folder_on_port(port):
+    """The folder the dashboard on `port` serves, or None if it isn't ours."""
+    try:
+        url = f"http://127.0.0.1:{port}{WHOAMI_PATH}"
+        with urllib.request.urlopen(url, timeout=1.0) as r:
+            text = r.read(500).decode("utf-8", "replace").strip()
+        # some other server could answer anything; only trust a real folder
+        return text if text and Path(text).is_dir() else None
+    except Exception:
+        return None
 
-    server = ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
-    url = f"http://localhost:{PORT}"
+
+def first_free_port(start, tries=10):
+    for port in range(start, start + tries):
+        if not port_in_use(port):
+            return port
+    return None
+
+
+def main():
+    port = PORT
+    if port_in_use(port):
+        running = folder_on_port(port)
+        if running == str(HERE):
+            # this folder's own dashboard — reuse it rather than double up
+            print(f"This folder's dashboard is already running at "
+                  f"http://localhost:{port}")
+            print("Opening it in your browser. Click \"Re-run model\" there to")
+            print("pick up your edits — no need to restart the server.")
+            webbrowser.open(f"http://localhost:{port}")
+            return
+
+        # something else holds the port. Serving it would show the wrong
+        # folder's numbers and quietly ignore edits made here, so move over.
+        whose = running or "another program (not a dashboard)"
+        port = first_free_port(PORT + 1)
+        if port is None:
+            print(f"Port {PORT} is taken by {whose}, and ports "
+                  f"{PORT + 1}-{PORT + 10} are all busy too.")
+            print("Stop that server, then run this again.")
+            return
+        print(f"Port {PORT} is taken by {whose}.")
+        print(f"Starting this folder's dashboard on port {port} instead.")
+
+    server = ThreadingHTTPServer(("127.0.0.1", port), Handler)
+    url = f"http://localhost:{port}"
     print(f"Dashboard running at {url}")
+    print(f"Serving {HERE}")
     print("Press Ctrl+C to stop.")
     threading.Timer(0.6, lambda: webbrowser.open(url)).start()
     try:

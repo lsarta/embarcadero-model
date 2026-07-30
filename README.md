@@ -26,8 +26,10 @@ python3 dashboard.py
 ```
 
 The dashboard opens at http://localhost:8642 and re-runs the model every
-time you refresh. `python3 model.py` prints the same results to the
-terminal instead. (Windows: use `python` if `python3` isn't recognized.)
+time you refresh. If something else already holds that port, it moves to
+the next free one and prints the URL. `python3 model.py` prints the same
+results to the terminal instead. (Windows: use `python` if `python3`
+isn't recognized.)
 
 ## Files
 

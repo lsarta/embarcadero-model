@@ -12,6 +12,12 @@ success, not for elegance.
 - On Windows, `python3` may need to be `python`.
 - When asked to "run the model" or "show me the model," start the
   dashboard unless the user asks for terminal output.
+- `dashboard.py` opens the browser itself. Do not also run `open`,
+  `start`, or `xdg-open` on the URL — that gives the user two windows
+  onto the same dashboard and confuses them.
+- Port 8642 may already be serving a *different* clone of this repo. The
+  script detects that and moves to the next free port. Read the URL it
+  actually prints and tell the user that one; don't assume 8642.
 - If the dashboard is already running, changes appear on refresh — tell
   the user to click "Re-run model" in the browser rather than restarting
   the server.
